@@ -17,7 +17,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Cash</b>Drive</a>
+    <a href="../../index2.html"><i><b style="color:#E0930A">Cash</b>Drive</i></a>
   </div>
   <!-- /.login-logo -->
   <div class="card">

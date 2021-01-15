@@ -17,7 +17,7 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="/"><b>Cash</b>Drive</a>
+    <a href="/"><i><b style="color:#E0930A">Cash</b>Drive</i></a>
   </div>
 
   <div class="card">
@@ -116,10 +116,8 @@
 <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
 
 <script>
-  var input2 = document.getElementById('agreeTerms');
-        input2.oninvalid = function(event) {
-            event.target.setCustomValidity('please accept our terms');
-        }
+ 
+      
 </script>
 </body>
 </html>
