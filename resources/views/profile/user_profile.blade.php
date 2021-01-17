@@ -20,6 +20,10 @@
     @include('layouts.sidebar')
 @endsection
 
+@section('alerts')
+  @include('layouts.alert')
+@stop
+
 @section('content')
     
     <!-- Content Header (Page header) -->
@@ -61,7 +65,7 @@
                   <div class="info-box bg-light">
                     <div class="info-box-content">
                       <span class="info-box-text text-center text-muted">Active Loan Amount</span>
-                      <span class="info-box-number text-center text-muted mb-0">2300</span>
+                      <span class="info-box-number text-center text-muted mb-0">&#8358;{{helper_user_active_loan()?helper_user_active_loan()->amount:0}}</span>
                     </div>
                   </div>
                 </div>
@@ -69,7 +73,7 @@
                   <div class="info-box bg-light">
                     <div class="info-box-content">
                       <span class="info-box-text text-center text-muted">Active Loan Due Date</span>
-                      <span class="info-box-number text-center text-muted mb-0">20-10-21</span>
+                      <span class="info-box-number text-center text-muted mb-0">{{helper_user_active_loan()?\Carbon\Carbon::parse(helper_user_active_loan()->loanPayment->due_date):'yyyy-mm-dd'}}</span>
                     </div>
                   </div>
                 </div>
@@ -77,7 +81,7 @@
                   <div class="info-box bg-light">
                     <div class="info-box-content">
                       <span class="info-box-text text-center text-muted">Total Loan</span>
-                      <span class="info-box-number text-center text-muted mb-0">20</span>
+                      <span class="info-box-number text-center text-muted mb-0">{{helper_user_loan_count()}}</span>
                     </div>
                   </div>
                 </div>
@@ -166,7 +170,10 @@
                             </li>
                         </ul>
 
-                        <a href="{{route('profile.edit',['id'=>1]) }}" class="btn btn-primary btn-block"><b>Edit User Details</b></a>
+                        <div class="text-center mt-5 mb-3">
+                          <a href="{{route('profile.edit',['id'=>1]) }}" class="btn btn-primary btn-block"><b>Edit User Details</b></a>
+                          <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal-info"><b>Update Payment Info</b></a>
+                        </div>
                     </div>
                     <!-- /.card-body -->
                 </div>

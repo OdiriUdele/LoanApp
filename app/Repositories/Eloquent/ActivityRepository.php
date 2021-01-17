@@ -3,10 +3,10 @@
 namespace App\Repositories\Eloquent;
 
 use App\Models\Activities;
-use App\Repositories\Eloquent\Interfaces\UserRepositoryInterface;
+use App\Repositories\Eloquent\Interfaces\ActivityRepositoryInterface;
 use Illuminate\Support\Collection;
 
-class UserRepository extends BaseRepository implements ActivityRepositoryInterface
+class ActivityRepository extends BaseRepository implements ActivityRepositoryInterface
 {
 
    /**

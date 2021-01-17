@@ -23,6 +23,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+     if(helper_is_admin()){
+         return view('admin.home');
+     }
         return view('home');
     }
 }

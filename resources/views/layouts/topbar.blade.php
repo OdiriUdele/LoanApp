@@ -7,9 +7,11 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Home</a>
       </li>
+      @if(!helper_is_admin())
       <li class="nav-item d-none d-sm-inline-block">
-        <a  type="button"  class="btn btn-info float-right" href="#" class="nav-link"> <i class="fas fa-plus"></i> Request Loan</a>
+        <a  type="button" id="loan_create"  class="btn btn-info float-right" href="#" onclick="return check_details();" class="nav-link"> <i class="fas fa-plus"></i> Request Loan</a>
       </li>
+      @endif
     </ul>
 
     <!-- SEARCH FORM -->
@@ -53,6 +55,7 @@
             </p>
           </li>
           <!-- Menu Body -->
+          @if(!helper_is_admin())
           <li class="user-body">
             <div class="row">
               <div class="col-6 text-center">
@@ -66,10 +69,29 @@
           </li>
           <!-- Menu Footer-->
           <li class="user-footer">
-            <a href="#" class="btn btn-default btn-flat">Profile</a>
+            <a href="/profile" class="btn btn-default btn-flat">Profile</a>
             <a  class="btn btn-default btn-flat float-right" href="{{ route('logout') }}"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sign out</a>
           </li>
+          @else
+            <li class="user-body">
+              <div class="row">
+                <div class="col-6 text-center">
+                  <a href="{{route('loan.active')}}">Active Loan</a>
+                </div>
+                <div class="col-6 text-center">
+                  <a href="{{route('loan.request')}}">All Loan Requests</a>
+                </div>
+              </div>
+              <!-- /.row -->
+            </li>
+            <!-- Menu Footer-->
+            <li class="user-footer">
+              <a href="#" class="btn btn-default btn-flat">Profile</a>
+              <a  class="btn btn-default btn-flat float-right" href="{{ route('logout') }}"
+                  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sign out</a>
+            </li>
+          @endif
         </ul>
       </li>
       <li class="nav-item">

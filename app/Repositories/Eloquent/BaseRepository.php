@@ -23,6 +23,17 @@ abstract class BaseRepository implements BaseRepositoryInterface
         $this->model = $model;
     }
  
+    public function all($active = null)
+    {
+        $query = $this->model->newQuery();
+
+        if (!is_null($active)) {
+            $query->where('active',$active);
+        }
+
+        return $query;
+    }
+
     /**
     * @param array $attributes
     *
@@ -53,7 +64,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
     */
     public function findByUserId($userid)
     {
-        return $this->model->where('user_id',$userid)->get();
+        return $this->model->where('user_id',$userid)->latest()->get();
     }
 
       /**
@@ -76,4 +87,5 @@ abstract class BaseRepository implements BaseRepositoryInterface
 
         return $model;
     }
+
 }

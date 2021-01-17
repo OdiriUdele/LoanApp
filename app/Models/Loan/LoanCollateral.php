@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class LoanCollateral extends Model
 {
-    protected $table = 'activities';
+    protected $table = 'loan_collaterals';
     protected $primaryKey = 'id';
 
     /**

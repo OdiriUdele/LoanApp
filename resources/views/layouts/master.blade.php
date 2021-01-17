@@ -29,12 +29,36 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
          @yield('alerts')
+         
         @yield('content')
+        
   </div>
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
         @csrf
-    </form>>
+    </form>
   <!-- /.content-wrapper -->
+    <div class="modal fade" id="modal-info">
+        <div class="modal-dialog">
+          <div class="modal-content bg-info">
+            <div class="modal-header">
+              <h4 class="modal-title">Update Payment Details</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p> To add your Card detail, you will need to make a payment of &#8358;50 to confirm that card details are valid. After Confirmation a refund will be made&hellip;</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+              <a href="{{route('payment.save')}}" type="button" class="btn btn-outline-light">Continue</a>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
   @yield('footer')
 </div>
 <!-- ./wrapper -->

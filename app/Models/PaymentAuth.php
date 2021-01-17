@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models\Loan;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class LoanPayment extends Model
+class PaymentAuth extends Model
 {
-    protected $table = 'loan_payments';
+    protected $table = 'payment_auths';
     protected $primaryKey = 'id';
 
     /**
@@ -15,13 +15,9 @@ class LoanPayment extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'loan_id','amount','due_date','active','paid',
+        'user_id', 'authorization_code', 'card_type','last4','exp_month','exp_year','bin','bank', 'channel', 'signature','reusable','country_code','account_name','active'
     ];
 
-    public function loan(){
-
-        return $this->belongsTo('App\Models\Loan\Loan', 'loan_id');
-    }
 
     public function user(){
         

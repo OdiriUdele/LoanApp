@@ -11,4 +11,14 @@ interface UserRepositoryInterface
     * update User Detail
     */
     public function updateDetail(array $attributes, $id);
+
+    /**
+    * @param array $attributes
+    * @return Model
+    *
+    * update User Detail
+    */
+    public function updatePaymentInfo(array $attributes);
+
+    
 }

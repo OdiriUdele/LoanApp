@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLoanPaymentsTable extends Migration
+class CreatePaymentAuthsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,24 @@ class CreateLoanPaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('loan_payments', function (Blueprint $table) {
+        Schema::create('payment_auths', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')
             ->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->integer('loan_id')->unsigned();
-            $table->foreign('loan_id')->references('id')
-            ->on('loans')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('amount');
-            $table->date('due_date');
+            $table->string('authorization_code');
+            $table->string('card_type');
+            $table->string('last4');
+            $table->string('exp_month');
+            $table->string('exp_year');
+            $table->string('bin');
+            $table->string('bank');
+            $table->string('channel');
+            $table->string('signature');
+            $table->boolean('reusable');
+            $table->string('country_code');
+            $table->string('account_name')->nullable();
             $table->tinyInteger('active')->default('0');
-            $table->tinyInteger('paid')->default('0');
             $table->timestamps();
         });
     }
@@ -36,6 +42,6 @@ class CreateLoanPaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('loan_payments');
+        Schema::dropIfExists('payment_auths');
     }
 }

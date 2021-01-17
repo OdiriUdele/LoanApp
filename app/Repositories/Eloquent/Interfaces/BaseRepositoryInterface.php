@@ -11,6 +11,14 @@ use Illuminate\Database\Eloquent\Model;
 */
 interface BaseRepositoryInterface
 {
+    /**
+    * @param array $attributes
+    * @return Model
+    *
+    * save Attribute
+    */
+   public function all($active = null);
+
    /**
     * @param array $attributes
     * @return Model
@@ -23,7 +31,7 @@ interface BaseRepositoryInterface
     * @param array $attributes
     * @return Model
     *
-    * save Attribute
+    * update Attribute
     */
     public function update(array $attributes, $id);
 

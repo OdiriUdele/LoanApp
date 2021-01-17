@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Exception;
 use App\Http\Controllers\Controller;
 use App\Repositories\Eloquent\Interfaces\UserRepositoryInterface;
+
 use App\Http\Requests\UserDetailRequest;
 
 class ProfileController extends Controller
@@ -32,6 +33,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
+        dd("yes");
         return view('profile.user_profile');
 
     }
@@ -64,7 +66,7 @@ class ProfileController extends Controller
 
             return view('profile.edit_user_profile');
         }catch(Exception $e){
-            dd($e);
+            return redirect()->back()->with('Error','Someting went wrong try Again!');
         }
     }
 
@@ -78,4 +80,5 @@ class ProfileController extends Controller
     {
         //
     }
+    
 }

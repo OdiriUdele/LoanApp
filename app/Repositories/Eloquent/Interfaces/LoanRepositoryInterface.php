@@ -1,10 +1,8 @@
 <?php
-namespace App\Repository\Eloquent\Interfaces;
+namespace App\Repositories\Eloquent\Interfaces;
 
-interface UserRepositoryInterface
+interface LoanRepositoryInterface
 {
-    //fetch all user Loan
-    public function all();
 
      /**
     * @param array $attributes
@@ -21,4 +19,8 @@ interface UserRepositoryInterface
     * create and save Loan Payment
     */
     public function createLoanPayment(array $attributes);
+
+    public function findLoanPayment($id);
+
+    public function activate_deactivateLoan($id,$active=1);
 }

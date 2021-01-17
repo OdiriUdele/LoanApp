@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('subTitle')
-  DashBoard
+  Admin DashBoard
 @endsection
 
 @section('header')
@@ -30,12 +30,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Dashboard</h1>
+                <h1 class="m-0">Admin Dashboard</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard</li>
+                <li class="breadcrumb-item active">Admin Dashboard</li>
                 </ol>
             </div><!-- /.col -->
             </div><!-- /.row -->
@@ -51,14 +51,14 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>&#8358;{{helper_user_active_loan()?helper_user_active_loan()->amount:0}}</h3>
+                <h3>&#8358;{{helper_active_loan_amount()}}</h3>
 
-                <p>{{helper_user_active_loan()?helper_user_active_loan()->loan_name:'No Loan Yet'}}</p>
+                <p>Total Loan Amount</p>
               </div>
               <div class="icon">
                 <i class="fa fa-coins"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{route('loan.active')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -66,9 +66,9 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>&#8358;10,000</h3>
+                <h3>{{helper_active_loan_count()}}</h3>
 
-                <p>Penalty Incured</p>
+                <p>Active Loans</p>
               </div>
               <div class="icon">
                 <i class="fa fa-sack-dollar"></i>
@@ -76,34 +76,18 @@
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success">
-              <div class="inner">
-                <h3>0.5<sup style="font-size: 20px">%</sup></h3>
-
-                <p>Penalty Rate</p>
-              </div>
-              <div class="icon">
-                <i class="fa fa-chart-line"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>{{helper_user_loan_count()}}</h3>
+                <h3>{{helper_loan_request_count()}}</h3>
 
-                <p>Total Loans</p>
+                <p>Total Loan Request</p>
               </div>
               <div class="icon">
                 <i class="fa fa-wallet"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{route('loan.request')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -194,49 +178,6 @@
           <!-- /.Left col -->
           <!-- right col (We are only adding the ID to make the widgets sortable)-->
           <section class="col-lg-5 connectedSortable">
-            <!-- Loan card -->
-            <div class="card bg-gradient-primary">
-              <div class="card-header border-0">
-                <h3 class="card-title">
-                  <i class="fas fa-money-bill"> </i>
-                  Find Out How much you can get
-                </h3>
-              </div>
-              <div class="card-body">
-                <form>
-                  <div class="form-group">
-                    <label for="caryear">Car Year</label>
-                    <select class="custom-select">
-                      <option>Select car Year</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="carmake">Car Make</label>
-                    <select class="custom-select">
-                      <option>Select car make</option>
-                    </select>
-                  </div>
-                  <div>
-                  <div class="form-group">
-                    <label for="carmodel">Model</label>
-                    <select class="custom-select">
-                      <option>Select car model</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="bodystyle">Body Style</label>
-                    <select class="custom-select">
-                      <option>body style</option>
-                    </select>
-                  </div>
-                </form>
-                <!-- /.card-body -->
-              </div>
-              <div class="card-footer">
-                <button type="submit" class="btn btn-warning">Submit</button>
-              </div>
-            </div>
-            <!-- /.card -->
             <!-- Calendar -->
             <div class="card bg-gradient-success">
               <div class="card-header border-0">

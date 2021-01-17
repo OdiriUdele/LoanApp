@@ -9,7 +9,7 @@
           <img src="{{asset('dist/img/user.png')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="{{ url('/profile') }}" class="d-block"> {{ Auth::user()->name }}</a>
+          <a href="{{helper_is_admin()?'#':url('/profile') }}" class="d-block"> {{ Auth::user()->name }}</a>
         </div>
       </div>
 
@@ -34,42 +34,12 @@
             <a href="/home" class="nav-link active">
               <i class="nav-icon fas fa-home"></i>
               <p>
-                Dashboard
+                {{helper_is_Admin()? 'Admin Dashboard':'Dashboard'}}
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="{{ url('/profile') }}" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
-              <p>
-                Your Profile
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-coins"></i>
-              <p>
-                Loans
-                <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right">6</span>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ asset('pages/layout/top-nav.html') }}" class="nav-link">
-                  <i class="far fa-coins nav-icon"></i>
-                  <p>View Loans</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ asset('pages/layout/top-nav-sidebar.html') }}" class="nav-link">
-                  <i class="far fa-wallet nav-icon"></i>
-                  <p>Create Loan</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+          @include('layouts.admin_sidebar')
+          @include('layouts.user_sidebar')
           <li class="nav-header"></li>
           <li class="nav-item">
             <a class="nav-link" href="{{ route('logout') }}"
