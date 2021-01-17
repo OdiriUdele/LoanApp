@@ -33,7 +33,6 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        dd("yes");
         return view('profile.user_profile');
 
     }

@@ -19,12 +19,19 @@ class PaystackApiController extends Controller
      */
     public function __construct(UserRepositoryInterface $userRepository)
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
         $this->userRepository = $userRepository;
     }
 
     //////payment Information//////////////////
 
+    //returns paystack key
+    public function paystack_secret_key(){
+        return env('PAYSTACK_TEST_SECRET_KEY', null);
+        
+    }
+
+    //test payment using user card details
     public function testPaymentInfo(){
         $url = "https://api.paystack.co/transaction/initialize";
         $fields = [
@@ -42,7 +49,7 @@ class PaystackApiController extends Controller
         curl_setopt($ch,CURLOPT_POST, true);
         curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Authorization: Bearer sk_test_3b0b7ddf66bd616b4cc6f74c1d7b6fb861a3cfdd",
+            "Authorization: Bearer ".$this->paystack_secret_key(),
             "Cache-Control: no-cache",
         ));
         
@@ -59,26 +66,12 @@ class PaystackApiController extends Controller
 
     public function addPaymentInfo(Request $request){
         // dd($request->reference);
-        $curl = curl_init();
-  
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.paystack.co/transaction/verify/$request->reference",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => array(
-            "Authorization: Bearer sk_test_3b0b7ddf66bd616b4cc6f74c1d7b6fb861a3cfdd",
-            "Cache-Control: no-cache",
-            ),
-        ));
-        
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-        curl_close($curl);
-        $result = json_decode($response);
+
+        $reference = $request->reference;
+
+        $verify = $this->verify_payment($reference);
+        $err = $verify[1];
+        $result = $verify[0];
         if (!$err) {
             $check = $this->check_card_result($result);
             if($check){
@@ -88,6 +81,7 @@ class PaystackApiController extends Controller
                 }
             }
         }
+        
         return redirect('/home')->with('error', 'Failed to verify Payment Details');
     }
 
@@ -105,7 +99,7 @@ class PaystackApiController extends Controller
         curl_setopt($ch,CURLOPT_POST, true);
         curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Authorization: Bearer sk_test_3b0b7ddf66bd616b4cc6f74c1d7b6fb861a3cfdd",
+            "Authorization: Bearer ".$this->paystack_secret_key(),
             "Cache-Control: no-cache",
         ));
         
@@ -116,6 +110,30 @@ class PaystackApiController extends Controller
         $result = curl_exec($ch);
         $res = json_decode($result);
         return $res->status;
+    }
+
+    public function verify_payment($reference){
+        $curl = curl_init();
+  
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.paystack.co/transaction/verify/$reference",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+            "Authorization: Bearer ".$this->paystack_secret_key(),
+            "Cache-Control: no-cache",
+            ),
+        ));
+        
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+        $result = [json_decode($response),$err];
+        return $result;
     }
 
     public function check_card_result($result){

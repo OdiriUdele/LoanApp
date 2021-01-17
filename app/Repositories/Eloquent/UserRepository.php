@@ -44,15 +44,19 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     */
     public function updatePaymentInfo(array $attributes)
     {
-        $modelelem = new PaymentAuth();
-        parent::__construct($modelelem);
-
-        $model = $this->create($attributes);
+        $modelel = PaymentAuth::create($attributes);
 
         $activepayExist = $this->activePayExist();
         if(!$activepayExist){
            $model = $this->activate_deactivatePay($model,1);
+           return $model;
         }
+        $active_pay = Auth::User()->activepayment_auths();
+        $del_active_pay = PaymentAuth::find($active_pay->id);
+
+        $del_active_pay->delete();
+        $model = $this->activate_deactivatePay($model,1);
+        
         return $model;
     }
 

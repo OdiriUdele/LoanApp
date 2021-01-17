@@ -29,10 +29,7 @@ class LoanRepository extends BaseRepository implements LoanRepositoryInterface
     */
     public function saveLoanCollateral(array $attributes)
     {
-        $modelelem = new LoanCollateral();
-        parent::__construct($modelelem);
-
-        $model = $this->create($attributes);
+        $modelelem = LoanCollateral::create($attributes);
 
         return $model;
     }
@@ -44,21 +41,29 @@ class LoanRepository extends BaseRepository implements LoanRepositoryInterface
     */
    public function createLoanPayment(array $attributes)
    {
-        $modelelem = new LoanPayment();
-        parent::__construct($modelelem);
-
-        $model = $this->create($attributes);
+        $model = LoanPayment::create($attributes);
 
         return $model;
    }
 
+    /**
+    *@param array $attributes
+    *
+    * @return Model
+    */
+    public function updateLoanPaymentAttrib($attrib, $value, $id)
+    {
+         $modelelem = LoanPayment::find($id);
+         $modelelem->$attrib = $value;
+         $modelelem->save();
+
+         return $modelelem;
+    }
+
    public function findLoanPayment($id)
    {
-        $modelelem = new LoanPayment();
-        parent::__construct($modelelem);
-
-        $model = $this->find($id);
-        return $model;
+        $modelelem = LoanPayment::find($id);
+        return $modelelem;
    }
 
     public function activate_deactivateLoan($id, $active=1)

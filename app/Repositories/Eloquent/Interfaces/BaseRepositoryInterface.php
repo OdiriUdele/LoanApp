@@ -35,6 +35,8 @@ interface BaseRepositoryInterface
     */
     public function update(array $attributes, $id);
 
+    public function updateAttrib($attrib,$value,$id);
+
    /**
     * @param $id
     * @return Model

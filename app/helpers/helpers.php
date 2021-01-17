@@ -103,3 +103,13 @@ if(! function_exists('helper_user_has_active_loan')){
     }
 }
 
+//calculate incurred charge for loan at 0.5%
+if(! function_exists('helper_loan_charge')){
+    function helper_loan_charge($loan_id){
+        $m_count = DB::table('loans')->where(['id'=>$loan_id])->first(['amount']);
+
+        $charge = (0.005*$m_count->amount);
+        return $charge;
+    }
+}
+

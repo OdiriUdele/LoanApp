@@ -4,7 +4,9 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use DB;
 
 class User extends Authenticatable
 {
@@ -52,6 +54,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\PaymentAuth');
     }
 
+    public function activepayment_auths(){ 
+      return DB::table('payment_auths')->where(['active'=>1,'user_id'=>$this->id])->first();
+    }
     public function activities(){
         
         return $this->hasMany('App\Models\Activities');

@@ -20,8 +20,10 @@ class CreateLoansTable extends Migration
             ->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('loan_name');
             $table->string('amount');
+            $table->string('incurred_charge')->default('0');
             $table->date('due_date');
             $table->tinyInteger('active')->default('0');
+            $table->tinyInteger('failed_payment')->default('0');
             $table->timestamps();
         });
     }

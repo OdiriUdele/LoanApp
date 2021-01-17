@@ -17,7 +17,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><i><b style="color:#E0930A">Cash</b>Drive</i></a>
+    <a href="/"><i><b style="color:#E0930A">Cash</b>Drive</i></a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -88,7 +88,7 @@
            
         @endif
         <p class="mb-0">
-            <a href="/register" class="text-center">Register a new membership</a>
+            <a href="/register" class="text-center">Register as a new User</a>
         </p>
     </div>
     <!-- /.login-card-body -->

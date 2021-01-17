@@ -88,4 +88,19 @@ abstract class BaseRepository implements BaseRepositoryInterface
         return $model;
     }
 
+    public function updateAttrib($attrib,$value,$id)
+    {
+
+        $query = $this->model->newQuery();
+
+        $model = $query->findOrFail($id);
+
+
+        $model->$attrib = $value;
+
+        $model->save();
+
+        return $model;
+    }
+
 }

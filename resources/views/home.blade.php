@@ -66,7 +66,7 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>&#8358;10,000</h3>
+                <h3>&#8358;{{helper_user_active_loan()?helper_user_active_loan()->incurred_charge:0}}</h3>
 
                 <p>Penalty Incured</p>
               </div>

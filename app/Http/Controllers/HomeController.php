@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Loan\loan;
+use App\Models\Loan\LoanPayment;
+
 
 class HomeController extends Controller
 {
@@ -23,9 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
+       
      if(helper_is_admin()){
          return view('admin.home');
      }
         return view('home');
     }
+
 }

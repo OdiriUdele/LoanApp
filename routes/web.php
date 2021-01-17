@@ -12,19 +12,20 @@
 */
 
 Route::get('/', function () {
+    
     return view('welcome');
 });
 
 Auth::routes();
+
+Route::get('/paymentinfo/save','User\PaystackApiController@testPaymentInfo')->name('payment.save');
+Route::get('/paymentinfo/confirm','User\PaystackApiController@addPaymentInfo')->name('payment.confirm');
 
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
 
     Route::resource('/profile', 'User\ProfileController');
-    
-    Route::get('/paymentinfo/save','User\PaystackApiController@testPaymentInfo')->name('payment.save');
-    Route::get('/paymentinfo/confirm','User\PaystackApiController@addPaymentInfo')->name('payment.confirm');
     
     Route::resource('/loan', 'LoanController');
 
