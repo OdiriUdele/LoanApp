@@ -16,7 +16,7 @@
 - User Requests Loan and adds Collateral details
 - Admin Checks Loan Requests and Activates them.
 - Admin Can Also Deactivate Loans
-- Use  php artisan db:seed to add admin details to Users table.
+- Use  <b>php artisan db:seed</b> to add admin details to Users table.
 - Admin details:
    username/email:admin@cashdrive.com
    password:password
