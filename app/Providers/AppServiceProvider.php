@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+Use App\User;
+use App\Models\Loan\Loan;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,5 +28,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        //  User::observe(new \App\Observers\UserActionsObserver);
+        //  Loan::observe(new \App\Observers\UserActionsObserver);
     }
 }

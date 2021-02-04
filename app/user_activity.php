@@ -1,15 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Concerns\HasEvents;
 
-class UserDetails extends Model
+class user_activity extends Model
 {
-    use HasEvents;
-
-    protected $table = 'user_details';
+    protected $table = 'user_activities';
     protected $primaryKey = 'id';
 
     /**
@@ -18,9 +15,8 @@ class UserDetails extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'phone', 'date_of_birth','bank_name','bank_acct_num','bank_acct_name','bvn_number'
+        'user_id', 'action', 'action_model', 'action_id',
     ];
-
 
     public function user(){
         

@@ -83,8 +83,9 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fa fa-at"></i></span>
                                         </div>
-                                        <input type="email" class="form-control" id="loan_name" name="loan_name" placeholder="Loan Name">
+                                        <input type="text" class="form-control" id="loan_name" name="loan_name" value="{{old('loan_name')}}" placeholder="Loan Name">
                                     </div>
+                                    <div class="text-danger">{{ $errors->first('loan_name') }}</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="amount">Amount</label>

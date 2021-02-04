@@ -31,7 +31,7 @@ class LoanRepository extends BaseRepository implements LoanRepositoryInterface
     {
         $modelelem = LoanCollateral::create($attributes);
 
-        return $model;
+        return $modelelem;
     }
 
     /**

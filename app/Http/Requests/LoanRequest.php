@@ -33,4 +33,11 @@ class LoanRequest extends FormRequest
             'car_body_style' => 'required|string', 
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'loan_name.required' => 'A loan is required', 
+        ];
+    }
 }

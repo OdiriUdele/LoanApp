@@ -4,9 +4,12 @@ namespace App\Models\Loan;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use Illuminate\Database\Eloquent\Concerns\HasEvents;
 
 class Loan extends Model
 {
+    use HasEvents;
+
     protected $table = 'loans';
     protected $primaryKey = 'id';
 

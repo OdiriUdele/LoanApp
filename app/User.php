@@ -4,13 +4,14 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Concerns\HasEvents;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use DB;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasEvents;
 
     /**
      * The attributes that are mass assignable.

@@ -77,11 +77,11 @@ abstract class BaseRepository implements BaseRepositoryInterface
      */
     public function update($input, $id)
     {
-        $query = $this->model->newQuery();
+        $query = $this->model;
 
         $model = $query->findOrFail($id);
 
-        $model->fill($input);
+        $model->update($input);
 
         $model->save();
 

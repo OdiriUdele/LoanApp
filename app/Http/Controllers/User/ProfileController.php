@@ -63,7 +63,7 @@ class ProfileController extends Controller
             
             $usersDetails = $this->userRepository->updateDetail($request->all(), $id);
 
-            return view('profile.edit_user_profile');
+            return redirect()->back()->with('success','Profile Updated Successfully!');;
         }catch(Exception $e){
             return redirect()->back()->with('Error','Someting went wrong try Again!');
         }
