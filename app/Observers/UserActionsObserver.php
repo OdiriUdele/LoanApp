@@ -18,7 +18,18 @@ class UserActionsObserver
         }
     }
 
-    public function deleting($model){
+    public function updated(Model $model){
+        if(Auth::check()){
+            user_activity::create([
+                'user_id'=>Auth::user()->id, 
+                'action'=>$model->getTable()." ".$model->id." updated",
+                 'action_model'=>$model->getTable(),
+                  'action_id'=>$model->id
+            ]);
+        }
+    }
+
+    public function deleting(Model $model){
 
         if(Auth::check()){
             user_activity::create([

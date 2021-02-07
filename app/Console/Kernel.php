@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('loan:bill')
           ->twiceDaily(10,19);
         $schedule->command('loan:penalise')
-          ->dailyAt('23:00');
+          ->dailyAt('3:28');
     }
 
     /**
