@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use App\Repositories\Eloquent\Interfaces\LoanRepositoryInterface;
 use App\Models\Loan\Loan;
 use Exception;
+use Log;
 
 class PenaliseLoan extends Command
 {
@@ -42,22 +43,23 @@ class PenaliseLoan extends Command
      */
     public function handle()
     {
-        $dueloans= Loan::whereDate('due_date', '<=', date('Y-m-d'))->where(['active'=>1,'failed_payment'=>1])->get();
-        foreach($dueloans as $loan){
-            try{
-                $loan_charge = $loan->incurred_charge;
-                $loanPay = $loan->loanPayment();
+        Log::info('This is some useful information.');
+        // $dueloans= Loan::whereDate('due_date', '<=', date('Y-m-d'))->where(['active'=>1,'failed_payment'=>1])->get();
+        // foreach($dueloans as $loan){
+        //     try{
+        //         $loan_charge = $loan->incurred_charge;
+        //         $loanPay = $loan->loanPayment();
 
-                $incurred_amount = $loan_charge + helper_loan_charge($loan->id);
-                $new_payment_amount = $loan->amount  + $incurred_amount;
-                //add Charge to 
-                $loanM = $this->loanRepository->updateAttrib('incurred_charge',$incurred_amount,$loan->id);
-                $Pay = $this->loanRepository->updateLoanPaymentAttrib('amount',$new_payment_amount,$loanPay->id);
-                $loanM = $this->loanRepository->updateAttrib('failed_payment','0',$loan->id);
-                $this->info('Loan Penalty has been Successful');
-            }catch(Exception $e){
-                $this->info('Failed to add incurred charge');
-            }
-        }
+        //         $incurred_amount = $loan_charge + helper_loan_charge($loan->id);
+        //         $new_payment_amount = $loan->amount  + $incurred_amount;
+        //         //add Charge to 
+        //         $loanM = $this->loanRepository->updateAttrib('incurred_charge',$incurred_amount,$loan->id);
+        //         $Pay = $this->loanRepository->updateLoanPaymentAttrib('amount',$new_payment_amount,$loanPay->id);
+        //         $loanM = $this->loanRepository->updateAttrib('failed_payment','0',$loan->id);
+        //         $this->info('Loan Penalty has been Successful');
+        //     }catch(Exception $e){
+        //         $this->info('Failed to add incurred charge');
+        //     }
+        // }
     }
 }

@@ -27,10 +27,10 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-        $schedule->command('loan:bill')
-          ->twiceDaily(10,19);
+        // $schedule->command('loan:bill')
+        //   ->twiceDaily(10,19);
         $schedule->command('loan:penalise')
-          ->dailyAt('23:00');
+          ->everyMinute();
     }
 
     /**
